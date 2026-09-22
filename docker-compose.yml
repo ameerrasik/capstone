@@ -1,0 +1,9 @@
+services:
+  ameerrasikmart:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ameerrasikmart-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

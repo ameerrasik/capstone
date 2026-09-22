@@ -30,6 +30,11 @@
                 <c:when test="${not empty sessionScope.user}">
                     <c:if test="${sessionScope.user.isBuyer()}">
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/wishlist">
+                                <i class="fa-solid fa-heart"></i> Wishlist
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/cart">
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
                             </a>
@@ -188,5 +193,6 @@
     <script src="${pageContext.request.contextPath}/js/toast.js"></script>
     <script src="${pageContext.request.contextPath}/js/api.js"></script>
     <script src="${pageContext.request.contextPath}/js/cart.js"></script>
+    <script src="${pageContext.request.contextPath}/js/wishlist.js"></script>
 </body>
 </html>

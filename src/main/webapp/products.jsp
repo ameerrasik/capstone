@@ -32,6 +32,11 @@
                 <c:when test="${not empty sessionScope.user}">
                     <c:if test="${sessionScope.user.isBuyer()}">
                         <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/wishlist">
+                                <i class="fa-solid fa-heart"></i> Wishlist
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/cart">
                                 <i class="fa-solid fa-cart-shopping"></i> Cart
                             </a>
@@ -115,6 +120,14 @@
                         <div class="card product-card">
                             <div class="product-image-wrap">
                                 <span class="product-category-tag">${p.category}</span>
+                                <c:if test="${empty sessionScope.user || sessionScope.user.isBuyer()}">
+                                    <button type="button"
+                                            class="btn-wishlist-toggle ${wishlistProductIds != null && wishlistProductIds.contains(p.id) ? 'active' : ''}"
+                                            onclick="Wishlist.toggle('${p.id}', this, '${pageContext.request.contextPath}')"
+                                            title="${wishlistProductIds != null && wishlistProductIds.contains(p.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}">
+                                        <i class="${wishlistProductIds != null && wishlistProductIds.contains(p.id) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                                    </button>
+                                </c:if>
                                 <img src="${p.imageUrl}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&auto=format&fit=crop&q=80'">
                             </div>
                             <div class="product-details">
@@ -158,5 +171,6 @@
     <script src="${pageContext.request.contextPath}/js/toast.js"></script>
     <script src="${pageContext.request.contextPath}/js/api.js"></script>
     <script src="${pageContext.request.contextPath}/js/cart.js"></script>
+    <script src="${pageContext.request.contextPath}/js/wishlist.js"></script>
 </body>
 </html>

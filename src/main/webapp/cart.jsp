@@ -18,6 +18,7 @@
             AmeerRasik<span style="color: var(--accent);">Mart</span>
         </a>
         <div class="nav-menu">
+            <a href="${pageContext.request.contextPath}/wishlist" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-heart" style="color: var(--danger);"></i> Wishlist</a>
             <a href="${pageContext.request.contextPath}/products" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-store"></i> Continue Shopping</a>
         </div>
     </nav>

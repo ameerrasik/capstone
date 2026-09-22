@@ -134,6 +134,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <attachClasses>true</attachClasses>
                 </configuration>
             </plugin>
             <plugin>

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS cart_items;
+DROP TABLE IF EXISTS wishlist_items;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 
@@ -71,10 +72,21 @@ CREATE TABLE reviews (
     CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE wishlist_items (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_wishlist_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_wishlist_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    CONSTRAINT uk_wishlist_user_product UNIQUE (user_id, product_id)
+);
+
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_products_seller ON products(seller_id);
 CREATE INDEX idx_products_category ON products(category);
 CREATE INDEX idx_cart_user ON cart_items(user_id);
+CREATE INDEX idx_wishlist_user ON wishlist_items(user_id);
 CREATE INDEX idx_orders_buyer ON orders(buyer_id);
 CREATE INDEX idx_order_items_order ON order_items(order_id);
 CREATE INDEX idx_reviews_product ON reviews(product_id);

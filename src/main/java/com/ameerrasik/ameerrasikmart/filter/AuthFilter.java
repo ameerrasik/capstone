@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Authentication and Role-based Authorization filter for AmeerRasik Mart.
  */
-@WebFilter(urlPatterns = {"/admin/*", "/seller/*", "/buyer/*", "/cart", "/checkout", "/orders", "/order-details"})
+@WebFilter(urlPatterns = {"/admin/*", "/seller/*", "/buyer/*", "/cart", "/wishlist", "/checkout", "/orders", "/order-details"})
 public class AuthFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 

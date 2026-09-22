@@ -6,10 +6,12 @@ The following Mermaid diagram represents the relational database schema of Ameer
 erDiagram
     USERS ||--o{ PRODUCTS : "lists (as Seller)"
     USERS ||--o{ CART_ITEMS : "adds to cart"
+    USERS ||--o{ WISHLIST_ITEMS : "saves in wishlist"
     USERS ||--o{ ORDERS : "places (as Buyer)"
     USERS ||--o{ REVIEWS : "writes"
     
     PRODUCTS ||--o{ CART_ITEMS : "contained in"
+    PRODUCTS ||--o{ WISHLIST_ITEMS : "saved in"
     PRODUCTS ||--o{ ORDER_ITEMS : "ordered in"
     PRODUCTS ||--o{ REVIEWS : "receives"
     
@@ -41,6 +43,13 @@ erDiagram
         bigint user_id FK
         bigint product_id FK
         int quantity
+        timestamp created_at
+    }
+
+    WISHLIST_ITEMS {
+        bigint id PK
+        bigint user_id FK
+        bigint product_id FK
         timestamp created_at
     }
 

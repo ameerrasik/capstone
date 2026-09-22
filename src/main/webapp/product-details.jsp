@@ -19,6 +19,10 @@
         </a>
         <div class="nav-menu">
             <a href="${pageContext.request.contextPath}/products" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-arrow-left"></i> Back to Products</a>
+            <c:if test="${not empty sessionScope.user && sessionScope.user.isBuyer()}">
+                <a href="${pageContext.request.contextPath}/wishlist" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-heart" style="color: var(--danger);"></i> Wishlist</a>
+                <a href="${pageContext.request.contextPath}/cart" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+            </c:if>
         </div>
     </nav>
 
@@ -61,21 +65,33 @@
                         </c:choose>
                     </div>
 
-                    <c:if test="${product.isInStock()}">
-                        <form action="${pageContext.request.contextPath}/cart" method="POST" style="display: flex; gap: 1rem; align-items: center; max-width: 380px;">
-                            <input type="hidden" name="action" value="add">
-                            <input type="hidden" name="productId" value="${product.id}">
-                            
-                            <div style="width: 100px;">
-                                <label class="form-label">Quantity</label>
-                                <input type="number" name="quantity" value="1" min="1" max="${product.stockQty}" class="form-control" style="text-align: center;">
-                            </div>
+                    <div style="display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; margin-top: 1rem;">
+                        <c:if test="${product.isInStock()}">
+                            <form action="${pageContext.request.contextPath}/cart" method="POST" style="display: flex; gap: 1rem; align-items: flex-end;">
+                                <input type="hidden" name="action" value="add">
+                                <input type="hidden" name="productId" value="${product.id}">
+                                
+                                <div style="width: 100px;">
+                                    <label class="form-label">Quantity</label>
+                                    <input type="number" name="quantity" value="1" min="1" max="${product.stockQty}" class="form-control" style="text-align: center;">
+                                </div>
 
-                            <button type="submit" class="btn btn-lg btn-primary" style="flex: 1; margin-top: 1.5rem;">
-                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                                </button>
+                            </form>
+                        </c:if>
+
+                        <c:if test="${empty sessionScope.user || sessionScope.user.isBuyer()}">
+                            <button type="button" 
+                                    class="btn btn-lg btn-outline btn-wishlist-detail ${isInWishlist ? 'active' : ''}" 
+                                    onclick="Wishlist.toggle('${product.id}', this, '${pageContext.request.contextPath}')" 
+                                    title="${isInWishlist ? 'Remove from Wishlist' : 'Save to Wishlist'}">
+                                <i class="${isInWishlist ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                                <span>${isInWishlist ? 'In Wishlist' : 'Add to Wishlist'}</span>
                             </button>
-                        </form>
-                    </c:if>
+                        </c:if>
+                    </div>
                 </div>
 
             </div>
@@ -143,5 +159,6 @@
     <script src="${pageContext.request.contextPath}/js/toast.js"></script>
     <script src="${pageContext.request.contextPath}/js/api.js"></script>
     <script src="${pageContext.request.contextPath}/js/cart.js"></script>
+    <script src="${pageContext.request.contextPath}/js/wishlist.js"></script>
 </body>
 </html>

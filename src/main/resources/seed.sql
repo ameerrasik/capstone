@@ -36,3 +36,8 @@ INSERT INTO reviews (product_id, user_id, rating, comment) VALUES
 (1, 4, 5, 'Exceptional quality mouse. Very responsive and smooth on desk.'),
 (2, 5, 5, 'Great mechanical tactile feel! Typing fast is so enjoyable.'),
 (6, 6, 4, 'Noise cancelling works surprisingly well during travel.');
+
+INSERT INTO wishlist_items (id, user_id, product_id) VALUES
+(1, 4, 2),
+(2, 4, 7);
+

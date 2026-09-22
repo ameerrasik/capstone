@@ -19,6 +19,7 @@
         </a>
         <div class="nav-menu">
             <a href="${pageContext.request.contextPath}/products" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-store"></i> Products</a>
+            <a href="${pageContext.request.contextPath}/wishlist" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-heart" style="color: var(--danger);"></i> Wishlist</a>
             <a href="${pageContext.request.contextPath}/cart" class="btn btn-sm btn-outline" style="color: #FFF;"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
         </div>
     </nav>
